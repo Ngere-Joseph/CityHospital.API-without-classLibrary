@@ -4,11 +4,7 @@ namespace CityInfo.API.Repositories
 {
     public static class RepositoryServiceExtensions
     {
-        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
-        {
-            // Register repositories
-            services.AddScoped<IRepositoryManager, RepositoryManager>();
-
-        }
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services) 
+            => services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }

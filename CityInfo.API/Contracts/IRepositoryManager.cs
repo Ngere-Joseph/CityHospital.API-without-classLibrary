@@ -4,6 +4,7 @@
     {
         ICityRepository City { get; }
         IHospitalRepository Hospital { get; }
+        IDoctorRepository Doctor { get; }
         void Save();
     }
 }

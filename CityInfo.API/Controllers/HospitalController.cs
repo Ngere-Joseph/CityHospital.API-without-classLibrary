@@ -1,5 +1,6 @@
 ﻿using CityInfo.API.Contracts;
 using CityInfo.API.Data.DTOs;
+using CityInfo.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.API.Controllers
@@ -37,6 +38,36 @@ namespace CityInfo.API.Controllers
 
             return Ok(hospitals);
         }
+
+        [HttpGet("doctor")]
+        public ActionResult<IEnumerable<HospitalDto>> GetHospitalDoctors(int cityId)
+        {
+            if (!_repositoryManager.Hospital.CityExist(cityId))
+            {
+                return NotFound();
+            }
+
+            var hospitalPerCity = _repositoryManager.Hospital.GetAllHospitalPerCity(cityId);
+
+            var hospitals = hospitalPerCity.Select(hospital => new HospitalDto
+            {
+                Name = hospital.Name,
+                HospitalType = hospital.HospitalType,
+                Id = hospital.Id,
+
+                Doctors = hospital.Doctors.Select(doctor => new DoctorDTO 
+                {
+                    Name = doctor.FName + "" + doctor.LName,
+                    Specialization = doctor.Specialization,
+                    YearsExperience = doctor.YearsExperience,
+                    Online = doctor.Online,
+                })
+
+            });
+
+            return Ok(hospitals);
+        }
+
 
         [HttpGet("{id}")]
         public ActionResult GetHospitalbyId(int id, int cityId)

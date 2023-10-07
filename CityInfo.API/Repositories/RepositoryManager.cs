@@ -1,4 +1,5 @@
 ﻿using CityInfo.API.Contracts;
+using CityInfo.API.Data;
 
 namespace CityInfo.API.Repositories
 {
@@ -6,6 +7,7 @@ namespace CityInfo.API.Repositories
     {
         private ICityRepository _cityRepository;
         private IHospitalRepository _hospitalRepository;
+        private IDoctorRepository _doctorRepository;
         private AppDbContext _appDbContext;
 
         public RepositoryManager(AppDbContext appDbContext)
@@ -33,6 +35,16 @@ namespace CityInfo.API.Repositories
 
                 return _hospitalRepository;
             }
+        }
+
+        public IDoctorRepository Doctor 
+        { 
+            get
+            {
+                if(_doctorRepository == null)
+                    _doctorRepository = new DoctorRepository(_appDbContext);
+                return _doctorRepository;
+            } 
         }
 
         public void Save() => _appDbContext.SaveChanges();

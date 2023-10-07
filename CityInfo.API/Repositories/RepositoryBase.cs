@@ -1,4 +1,5 @@
 ﻿using CityInfo.API.Contracts;
+using CityInfo.API.Data;
 using CityInfo.API.Data.DTOs;
 using CityInfo.API.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -33,11 +34,11 @@ namespace CityInfo.API.Repositories
 
         public void Update(T entity) => AppDbContext.Set<T>().Update(entity);
 
-        public IEnumerable<Hospital> GetAllHospitalPerCity(int cityId) => AppDbContext.hospitals.Where(h => h.CityId == cityId).ToList();
+        public IEnumerable<Hospital> GetAllHospitalPerCity(int cityId) => AppDbContext.Hospitals.Where(h => h.CityId == cityId).Include(d => d.Doctors).ToList();
 
-        public Hospital? GetSingleHospitalPerCity(int cityId, int id) => AppDbContext.hospitals.Where(h => h.CityId == cityId && h.Id == id).FirstOrDefault();
+        public Hospital? GetSingleHospitalPerCity(int cityId, int id) => AppDbContext.Hospitals.Where(h => h.CityId == cityId && h.Id == id).FirstOrDefault();
 
-        public bool CityExist(int cityId) => AppDbContext.cities.Any(c => c.Id == cityId);
+        public bool CityExist(int cityId) => AppDbContext.Cities.Any(c => c.Id == cityId);
         
     }
 }

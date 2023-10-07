@@ -1,4 +1,5 @@
 ﻿using CityInfo.API.Contracts;
+using CityInfo.API.Data;
 using CityInfo.API.Entities;
 
 namespace CityInfo.API.Repositories

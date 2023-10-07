@@ -4,9 +4,9 @@ using CityInfo.API.Entities;
 
 namespace CityInfo.API.Repositories
 {
-    public class CityRepository : RepositoryBase<City>, ICityRepository
+    public class DoctorRepository : RepositoryBase<Doctor>, IDoctorRepository
     {
-        public CityRepository(AppDbContext appDbContext) : base(appDbContext)
+        public DoctorRepository(AppDbContext appDbContext): base(appDbContext)
         {
         }
     }

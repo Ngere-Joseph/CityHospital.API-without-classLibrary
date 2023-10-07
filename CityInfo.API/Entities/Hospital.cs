@@ -19,6 +19,9 @@ namespace CityInfo.API.Entities
         public City? City { get; set; }
         public int CityId { get; set; }
 
+        public ICollection<Doctor> Doctors { get; set; } 
+            = new List<Doctor>();
+
         //Contructor, so city class always has a Name value
         public Hospital(string name)
         {
